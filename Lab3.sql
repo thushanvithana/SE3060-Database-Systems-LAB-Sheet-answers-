@@ -1,16 +1,8 @@
 --1)
-CREATE TYPE Address_t AS OBJECT(
-    streetNumber NUMBER,
-    streetName VARCHAR2(20),
-    suburb VARCHAR2(20),
-    state VARCHAR(10),
-    pin NUMBER(4)
-)
-/
 
-CREATE TYPE exchanges_t AS VARRAY(5) OF VARCHAR2(15)
+CREATE TYPE exchanges_t AS VARRAY(3) OF VARCHAR2(40)
 /
-
+    
 CREATE TYPE stocks_t AS OBJECT(
     company VARCHAR(12),
     currentPrice NUMBER(6,2),
@@ -20,17 +12,29 @@ CREATE TYPE stocks_t AS OBJECT(
 )
 /
 
+CREATE TYPE Address_t AS OBJECT(
+    streetNumber NUMBER,
+    streetName VARCHAR2(20),
+    suburb VARCHAR2(20),
+    state VARCHAR(10),
+    pin NUMBER(4)
+)
+/ 
+
+--create invest type 
 CREATE TYPE investments_t AS OBJECT(
     company REF stocks_t,
     purchasePrice NUMBER(6,2),
     investDate DATE,
-    qty NUMBER
+    qty NUMBER(6)
 )
 /
 
+--create invest table using invest type 
 CREATE TYPE invest_table_type AS TABLE OF investments_t
 /
 
+--create client type 
 CREATE TYPE clients_t AS OBJECT(
     cno NUMBER,
     cname VARCHAR(30),
@@ -38,11 +42,15 @@ CREATE TYPE clients_t AS OBJECT(
     investments invest_table_type
 )
 /
-
-CREATE TABLE stocks_tbl of stocks_t(CONSTRAINT stocks_PK PRIMARY KEY(company))
+    
+--creating tables 
+CREATE TABLE stocks_tbl of stocks_t(
+    CONSTRAINT stocks_PK PRIMARY KEY(company)
+    )
 /
 
-CREATE TABLE clients_tbl of clients_t(CONSTRAINT clients_PK PRIMARY KEY(cno)) NESTED TABLE investments STORE AS clients_investment_table
+CREATE TABLE clients_tbl of clients_t(
+    CONSTRAINT clients_PK PRIMARY KEY(cno)) NESTED TABLE investments STORE AS clients_investment_table
 /
 
 ALTER TABLE clients_investment_table
