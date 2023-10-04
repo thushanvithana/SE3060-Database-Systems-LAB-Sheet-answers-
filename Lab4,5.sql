@@ -1,10 +1,7 @@
 --1--
 --(a)--
 ALTER TYPE stock_t 
-ADD MEMBER 
-FUNCTION
-computeYield
-RETURN FLOAT 
+ADD MEMBER FUNCTION computeYield RETURN FLOAT 
 CASCADE;
 /
 
@@ -12,7 +9,7 @@ CASCADE;
 CREATE OR REPLACE TYPE BODY stock_t AS 
 MEMBER FUNCTION computeYield RETURN FLOAT IS
     BEGIN
-        RETURN SELF.dividend / SELF.curr_price*100;
+        RETURN ((SELF.dividend / SELF.curr_price)*100);
     END computeYield;
 END;
 /

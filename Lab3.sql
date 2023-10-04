@@ -6,7 +6,7 @@ CREATE TYPE exchanges_t AS VARRAY(3) OF VARCHAR2(40)
 CREATE TYPE stocks_t AS OBJECT(
     company VARCHAR(12),
     currentPrice NUMBER(6,2),
-    exchanges exchanges_t,
+    exchanges exchanges_t,  
     dividend NUMBER(4,2),
     eps NUMBER(6,2)
 )
