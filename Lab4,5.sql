@@ -21,10 +21,7 @@ FROM stocks s
 
 --(b)--
 ALTER TYPE stock_t 
-ADD MEMBER 
-FUNCTION
-priceInUSD(rate FLOAT)
-RETURN FLOAT 
+ADD MEMBER FUNCTION priceInUSD(rate FLOAT) RETURN FLOAT 
 CASCADE;
 
 CREATE OR REPLACE TYPE BODY stock_t AS
@@ -44,10 +41,7 @@ FROM stocks s;
 
 --(c)--
 ALTER TYPE stock_t 
-ADD MEMBER 
-FUNCTION
-countExchanges
-RETURN INT 
+ADD MEMBER FUNCTION countExchanges RETURN INT 
 CASCADE;
 
 CREATE OR REPLACE TYPE BODY stock_t AS
@@ -70,10 +64,7 @@ FROM stocks s;
 
 --(d)--
 ALTER TYPE client_t 
-ADD MEMBER 
-FUNCTION
-computePurchaseValue
-RETURN FLOAT 
+ADD MEMBER FUNCTION computePurchaseValue RETURN FLOAT 
 CASCADE;
 
 CREATE OR REPLACE TYPE BODY client_t AS
@@ -91,10 +82,7 @@ SELECT c.name, c.computePurchaseValue() FROM clients c;
 
 --(e)--
 ALTER TYPE client_t 
-ADD MEMBER 
-FUNCTION
-computeTotalProfit
-RETURN FLOAT 
+ADD MEMBER FUNCTION computeTotalProfit RETURN FLOAT 
 CASCADE;
 
 CREATE OR REPLACE TYPE BODY client_t AS
